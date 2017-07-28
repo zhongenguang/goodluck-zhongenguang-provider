@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Bootstrap 实例 - 基本的表格</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <a href="http://localhost:8080/Ye" >注册</a>
+    <button onclick="submits()">导出所选数据</button>
+    <form action="xiazai.do" method="post" id ="a" >
+<table class="table">
+    <caption>基本的表格布局</caption>
+
+    <tbody>
+    <tr>
+        <td>选择</td>
+        <td>id</td>
+        <td>姓名</td>
+        <td>密码</td>
+        <td>年龄</td>
+        <td>性别</td>
+        <td>地址</td>
+        <td>爱好</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="A:${userTable}">
+        <td><input type="checkbox" name="ids" value="${A.id}"> </td>
+        <td  align="center" th:text="${A.id}"></td>
+        <td  align="center" th:text="${A.name}"></td>
+        <td  align="center" th:text="${A.password}"></td>
+        <td  align="center" th:text="${A.age}"></td>
+        <td  align="center" th:text="${A.sex}"></td>
+        <td  align="center" th:text="${A.tu}"></td>
+        <td  align="center" th:text="${A.hobby}"></td>
+        <td  align="center"><a th:href="@{delete1.do(id=${A.id})}">删除</a></td>
+    </tr>
+    </tbody>
+</table>
+    </form>
+
+
+
+
+    <script type="text/javascript">
+        function submits(){
+            var ids=document.getElementsByName("ids");
+            var num = 0;
+            for(var i=0;i<ids.length;i++){
+                if(ids[i].checked){
+                    num++;
+                }
+            }
+            if(num == 0){
+                alert("你没有选择任何东西");
+                return false;
+            }else{
+                document.getElementById("a").submit();
+            }
+        }
+    </script>
+
+
+</body>
+</html>
